@@ -18,12 +18,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       >
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Lore Title
+            Project Title
           </span>
           <input
             value={post.title}
             onChange={(e) => setPost({ ...post, title: e.target.value })}
-            placeholder="Name this lore piece..."
+            placeholder="Name this project..."
             required
             className="form_input"
           />
@@ -31,12 +31,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Lore Description
+            Project Description
           </span>
           <textarea
             value={post.content}
             onChange={(e) => setPost({ ...post, content: e.target.value })}
-            placeholder="Describe this lore piece..."
+            placeholder="Give a description to this project..."
             required
             className="form_textarea"
           />

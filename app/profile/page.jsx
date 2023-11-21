@@ -12,28 +12,34 @@ const MyProfile = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const [posts, setPosts] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await fetch(`/api/users/${session?.user.id}/lore`);
+    const fetchProjects = async () => {
+      const res = await fetch(`/api/users/${session?.user.id}/projects`);
       const data = await res.json();
-      setPosts(data);
+      setProjects(data);
+
+      console.log(data);
     };
 
-    if (session?.user.id) fetchPosts();
+    if (session?.user.id) {
+      fetchProjects();
+    }
   }, []);
 
   const handleEdit = (post) => {
-    router.push(`/update-lore?id=${post._id}`);
+    router.push(`/update-project?id=${post._id}`);
   };
 
   const handleDelete = async (post) => {
-    const hasConfirmed = confirm("Are you sure you want to delete this lore?");
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this project?"
+    );
 
     if (hasConfirmed) {
       try {
-        await fetch(`/api/lore/${post._id}`, {
+        await fetch(`/api/projects/${post._id}`, {
           method: "DELETE",
         });
 
@@ -51,7 +57,7 @@ const MyProfile = () => {
     <Profile
       name="My"
       desc="Welcome to your personalized profile page!"
-      data={posts}
+      projects={projects}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />

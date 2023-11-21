@@ -1,5 +1,5 @@
 import { connectToDB } from "@utils/database";
-import Lore from "@models/lore";
+import Project from "@models/project";
 
 export const POST = async (req) => {
   const { creator, title, content, tag } = await req.json();
@@ -7,20 +7,20 @@ export const POST = async (req) => {
   try {
     await connectToDB();
 
-    const newLore = new Lore({
+    const newProject = new Project({
       creator,
       title,
       content,
       tag,
     });
 
-    await newLore.save();
+    await newProject.save();
 
-    return new Response(JSON.stringify(newLore), {
+    return new Response(JSON.stringify(newProject), {
       status: 201,
     });
   } catch (err) {
-    return new Response("Failed to create new lore", {
+    return new Response("Failed to create new project", {
       status: 500,
     });
   }

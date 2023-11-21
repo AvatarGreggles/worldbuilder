@@ -7,15 +7,15 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { set } from "mongoose";
 
-const Card = ({ lore, handleTagClick, handleEdit, handleDelete }) => {
+const Card = ({ data, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathname = usePathname();
   const router = useRouter();
 
   const handleCopy = () => {
-    setCopied(lore.content);
-    navigator.clipboard.writeText(lore.content);
+    setCopied(data.content);
+    navigator.clipboard.writeText(data.content);
     setTimeout(() => {
       setCopied(""), 3000;
     });
@@ -26,7 +26,7 @@ const Card = ({ lore, handleTagClick, handleEdit, handleDelete }) => {
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
-            src={lore?.creator?.image}
+            src={data?.creator?.image}
             alt="user image"
             width={40}
             height={40}
@@ -35,10 +35,10 @@ const Card = ({ lore, handleTagClick, handleEdit, handleDelete }) => {
 
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-900">
-              {lore?.creator?.name}
+              {data?.creator?.name}
             </h3>
             <p className="font-inter text-sm text-gray-500">
-              {lore?.creator?.email}
+              {data?.creator?.email}
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ const Card = ({ lore, handleTagClick, handleEdit, handleDelete }) => {
         <div className="copy_btn" onClick={() => handleCopy()}>
           <Image
             src={
-              copied === lore.content
+              copied === data.content
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
@@ -59,17 +59,17 @@ const Card = ({ lore, handleTagClick, handleEdit, handleDelete }) => {
       </div>
 
       <p className="my-4 font-satoshi text-m text-gray-700 font-bold">
-        {lore.title}
+        {data.title}
       </p>
-      <p className="my-4 font-satoshi text-sm text-gray-700">{lore.content}</p>
+      <p className="my-4 font-satoshi text-sm text-gray-700">{data.content}</p>
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(lore.tag)}
+        onClick={() => handleTagClick && handleTagClick(data.tag)}
       >
-        #{lore.tag}
+        #{data.tag}
       </p>
 
-      {session?.user?.id === lore?.creator?.id && pathname === "/profile" && (
+      {session?.user?.id === data?.creator?.id && pathname === "/profile" && (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"

@@ -8,30 +8,30 @@ import { useRouter } from "next/navigation";
 
 import Form from "@components/Form";
 
-const CreateLore = () => {
+const CreateProject = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
   const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState({
+  const [project, setProject] = useState({
     title: "",
     content: "",
     tag: "",
   });
 
-  const createLore = async (e) => {
+  const createProject = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch("/api/lore/new", {
+      const res = await fetch("/api/projects/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: post.title,
-          content: post.content,
-          tag: post.tag,
+          title: project.title,
+          content: project.content,
+          tag: project.tag,
           creator: {
             id: session.user.id,
             name: session.user.name,
@@ -53,12 +53,12 @@ const CreateLore = () => {
   return (
     <Form
       type="Create"
-      post={post}
-      setPost={setPost}
+      post={project}
+      setPost={setProject}
       submitting={submitting}
-      handleSubmit={createLore}
+      handleSubmit={createProject}
     />
   );
 };
 
-export default CreateLore;
+export default CreateProject;

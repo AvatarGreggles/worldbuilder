@@ -37,8 +37,8 @@ const Nav = () => {
       <div className="sm:flex hidden">
         {isUserLoggedIn ? (
           <div className="flex gap-3 md:gap-">
-            <Link href="/create-lore" className="black_btn">
-              Create Lore
+            <Link href="/create-project" className="black_btn">
+              Create Project
             </Link>
 
             <button type="button" onClick={signOut} className="outline_btn">
@@ -94,12 +94,8 @@ const Nav = () => {
                 >
                   My Profile
                 </Link>
-                <Link
-                  href="/create-lore"
-                  className="dropdown_link"
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  Create Lore
+                <Link href="/create-project" className="black_btn">
+                  Create Project
                 </Link>
                 <button
                   type="button"

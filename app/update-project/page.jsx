@@ -5,10 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import Form from "@components/Form";
 
-const EditLore = () => {
+const EditProject = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const loreId = searchParams.get("id");
+  const projectId = searchParams.get("id");
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
@@ -18,9 +18,9 @@ const EditLore = () => {
   });
 
   useEffect(() => {
-    const getLoreDetails = async () => {
-      console.log(loreId);
-      const res = await fetch(`/api/lore/${loreId}`);
+    const getProjectDetails = async () => {
+      console.log(projectId);
+      const res = await fetch(`/api/projects/${projectId}`);
       const data = await res.json();
 
       setPost({
@@ -30,17 +30,17 @@ const EditLore = () => {
       });
     };
 
-    if (loreId) getLoreDetails();
-  }, [loreId]);
+    if (projectId) getProjectDetails();
+  }, [projectId]);
 
-  const updateLore = async (e) => {
+  const updateProject = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
-    if (!loreId) return alert("No lore id found");
+    if (!projectId) return alert("No project id found");
 
     try {
-      const res = await fetch(`/api/lore/${loreId}`, {
+      const res = await fetch(`/api/projects/${projectId}`, {
         method: "PATCH",
         body: JSON.stringify({
           title: post.title,
@@ -64,9 +64,9 @@ const EditLore = () => {
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={updateLore}
+      handleSubmit={updateProject}
     />
   );
 };
 
-export default EditLore;
+export default EditProject;

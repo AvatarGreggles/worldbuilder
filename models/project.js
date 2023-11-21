@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const LoreSchema = new Schema({
+const ProjectSchema = new Schema({
   creator: {
     type: {
       id: String,
@@ -23,6 +23,6 @@ const LoreSchema = new Schema({
   },
 });
 
-const Lore = models.Lore || model("Lore", LoreSchema);
+const Project = models.Project || model("Project", ProjectSchema);
 
-export default Lore;
+export default Project;

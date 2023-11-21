@@ -7,8 +7,12 @@ import Card from "@components/Card";
 const CardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 card_layout">
-      {data.map((lore) => (
-        <Card key={lore._id} lore={lore} handleTagClick={handleTagClick} />
+      {data.map((project) => (
+        <Card
+          key={project._id}
+          data={project}
+          handleTagClick={handleTagClick}
+        />
       ))}
     </div>
   );
@@ -16,20 +20,20 @@ const CardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [searchText, setSearchText] = useState("");
-  const [lores, setLores] = useState([]);
+  const [projects, setProjects] = useState([]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
   };
 
   useEffect(() => {
-    const fetchLores = async () => {
-      const res = await fetch("/api/lore");
+    const fetchProjects = async () => {
+      const res = await fetch("/api/projects");
       const data = await res.json();
-      setLores(data);
+      setProjects(data);
     };
 
-    fetchLores();
+    fetchProjects();
   }, []);
 
   return (
@@ -44,7 +48,9 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      {lores.length > 0 && <CardList data={lores} handleTagClick={() => {}} />}
+      {projects.length > 0 && (
+        <CardList data={projects} handleTagClick={() => {}} />
+      )}
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import { connectToDB } from "@utils/database";
-import Lore from "@models/lore";
+import Project from "@models/project";
 
 export const revalidate = 0; // this is the new line added
 
@@ -7,12 +7,12 @@ export const GET = async (req) => {
   try {
     await connectToDB();
 
-    const lores = await Lore.find({});
-    return new Response(JSON.stringify(lores), {
+    const projects = await Project.find({});
+    return new Response(JSON.stringify(projects), {
       status: 200,
     });
   } catch (err) {
-    return new Response("Failed to fetch all lore", {
+    return new Response("Failed to fetch all projects", {
       status: 500,
     });
   }
