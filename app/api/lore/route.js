@@ -1,6 +1,8 @@
 import { connectToDB } from "@utils/database";
 import Lore from "@models/lore";
 
+export const revalidate = 0; // this is the new line added
+
 export const GET = async (req) => {
   try {
     await connectToDB();
